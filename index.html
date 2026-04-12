@@ -4,20 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steve's Website</title>
+
+    <style>
+        /* 1. The Color Palette */
+        :root {
+            --bg-color: #0f172a;      /* Deep Midnight Blue */
+            --card-bg: #1e293b;       /* Slightly lighter blue */
+            --text-main: #f8fafc;     /* Off-white */
+            --accent: #38bdf8;        /* Sky Blue */
+            --footer-bg: #020617;     /* Almost Black */
+        }
+
+        /* 2. Layout & Background */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 3. Main Content Styling */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        /* 4. Footer Styling */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--text-main);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 2px solid var(--card-bg);
+        }
+
+        .footer-content a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .footer-content a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Steve's Website!</h1>
-    <p>This is a simple webpage created by Steve.</p>
+
+    <main>
+        <h1>Welcome to Steve's Website!</h1>
+        <p>This is a simple webpage created by Steve. Hosted on Cloudflare, powered by GitHub.</p>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Steve. All rights reserved.</p>
+            <nav>
+                <a href="https://bsky.app/profile/kapalaga.com">Bluesky</a>
+                <a href="mailto:Stephen.kimbowa@yahoo.com">Contact</a>
+            </nav>
+        </div>
+    </footer>
 
 </body>
-
-<footer>
-    <div class="footer-content">
-        <p>&copy; 2026 Steve. All rights reserved.</p>
-        <nav>
-            <a href="https://bsky.app/profile/kapalaga.com">Bluesky</a> | 
-            <a href="mailto:Stephen.kimbowa@yahoo.com">Contact</a>
-        </nav>
-    </div>
-</footer>
 </html>
