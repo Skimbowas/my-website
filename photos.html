@@ -4,63 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snapshots - My Collection</title>
-    <link rel="stylesheet" href="style.css"> 
-</head>
+    <link rel="stylesheet" href="style.css?v=1.2"> </head>
 <body>
-    <nav>
+    <nav class="side-nav">
         <div class="nav-item">
-        <a href="index.html#home">
-            <span class="icon">🏠</span>
-            <span class="nav-text">Home</span>
-        </a>
-    </div>
-    <div class="nav-item">
-        <a href="photos.html">
-            <span class="icon">📸</span>
-            <span class="nav-text">Photos</span>
-        </a>
-    </div>
-    <div class="nav-item">
-        <a href="library.html">
-            <span class="icon">📚</span>
-            <span class="nav-text">Library</span>
-        </a>
-    </div>
-    </nav>
-
-    <section id="photos" class="content-section">
-        <h2>Snapshots</h2>
-        <p class="section-intro">Places I've been and things I've seen.</p>
-
-        <p>NY International Auto Show</p>
-
-        <p>Thursday April 9th, 2026</p>
-        
-        <div class="photo-gallery">
-            <div class="photo-item">
-                <img src="images/img_0111.jpeg" alt="Entrance Banner">
-            </div>
-            <div class="photo-item">
-                <img src="images/img_0120.jpeg" alt="Porsche">
-            </div>
-            <div class="photo-item">
-                <img src="images/img_0119.jpeg" alt="Koenigsegg">
-            </div>
+            <a href="index.html#home">
+                <span class="icon">🏠</span>
+                <span class="nav-text">Home</span>
+            </a>
         </div>
-    </section>
+        <div class="nav-item">
+            <a href="photos.html">
+                <span class="icon">📸</span>
+                <span class="nav-text">Photos</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="library.html">
+                <span class="icon">📚</span>
+                <span class="nav-text">Library</span>
+            </a>
+        </div>
+        </nav>
+
+    <main>
+        <section id="photos" class="content-section">
+            <h2>Snapshots</h2>
+            <p class="section-intro">Places I've been and things I've seen.</p>
+
+            <p>NY International Auto Show</p>
+            <p>Thursday April 9th, 2026</p>
+            
+            <div class="photo-gallery">
+                <div class="photo-item">
+                    <img src="images/img_0111.jpeg" alt="Entrance Banner">
+                </div>
+                <div class="photo-item">
+                    <img src="images/img_0120.jpeg" alt="Porsche">
+                </div>
+                <div class="photo-item">
+                    <img src="images/img_0119.jpeg" alt="Koenigsegg">
+                </div>
+            </div>
+        </section>
+    </main>
 
 <script>
-const sideNav = document.querySelector('.side-nav');
-
-// Expand on mouse enter
-sideNav.addEventListener('mouseenter', () => {
-    sideNav.classList.add('expanded');
-});
-
-// Collapse on mouse leave
-sideNav.addEventListener('mouseleave', () => {
-    sideNav.classList.remove('expanded');
-});
+    const sideNav = document.querySelector('.side-nav');
+    sideNav.addEventListener('mouseenter', () => sideNav.classList.add('expanded'));
+    sideNav.addEventListener('mouseleave', () => sideNav.classList.remove('expanded'));
 </script>
 
 </body>
