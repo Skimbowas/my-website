@@ -31,6 +31,8 @@ body {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
+    backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px); /* For Safari support */
 }
 
 .nav-item a {
@@ -106,6 +108,17 @@ h2 {
     padding: 30px;
     border-radius: 24px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px); /* For Safari support */
+.book-card, .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover, .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
 }
 
 .card:hover, .project-card:hover {
@@ -202,6 +215,17 @@ footer {
     display: flex;
     align-items: center;
     transition: 0.3s ease;
+    backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px); /* For Safari support */
+.book-card, .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover, .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
 }
 
 .book-card:hover {
@@ -272,4 +296,15 @@ footer {
 
 @media (max-width: 600px) {
     .photo-gallery { column-count: 1; }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply animation to the main content */
+main {
+    animation: fadeIn 0.6s ease-out;
 }
