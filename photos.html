@@ -27,5 +27,20 @@
             </div>
         </div>
     </section>
+    
+<script>
+const sideNav = document.querySelector('.side-nav');
+
+// Expand on mouse enter
+sideNav.addEventListener('mouseenter', () => {
+    sideNav.classList.add('expanded');
+});
+
+// Collapse on mouse leave
+sideNav.addEventListener('mouseleave', () => {
+    sideNav.classList.remove('expanded');
+});
+</script>
+
 </body>
 </html>

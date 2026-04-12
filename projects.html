@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Projects</title>
-        <link rel="stylesheet" href="styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Steve</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
 
-    </head>
-    <body>
-
-    <nav class="side-nav">
+<nav class="side-nav">
     <div class="nav-item">
-        <a href="index.html#home">
+        <a href="index.html">
             <span class="icon">🏠</span>
             <span class="nav-text">Home</span>
         </a>
@@ -28,8 +27,15 @@
             <span class="nav-text">Library</span>
         </a>
     </div>
+    <div class="nav-item">
+        <a href="projects.html">
+            <span class="icon">🚀</span>
+            <span class="nav-text">Projects</span>
+        </a>
+    </div>
 </nav>
 
+<main>
     <section id="projects" class="content-section">
         <h2>Project Showcase</h2>
         <div class="project-grid">
@@ -38,14 +44,16 @@
                 <p>My first automated deployment using Cloudflare Pages and GitHub.</p>
                 <span class="tag">HTML/CSS</span>
             </div>
-            </div>
+        </div>
     </section>
+</main>
 
-    <script>
+<script>
+    // This makes the sidebar expand/collapse on hover
     const sideNav = document.querySelector('.side-nav');
     sideNav.addEventListener('mouseenter', () => sideNav.classList.add('expanded'));
     sideNav.addEventListener('mouseleave', () => sideNav.classList.remove('expanded'));
 </script>
 
-    </body>
+</body>
 </html>
