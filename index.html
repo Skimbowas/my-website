@@ -185,12 +185,13 @@ footer {
         padding: 20px;
     }
 }
-/* ADD THIS BACK to your CSS */
-.side-nav:hover {
+
+/* ADD THIS INSTEAD */
+.side-nav.expanded {
     width: 200px;
 }
 
-.side-nav:hover .nav-text {
+.side-nav.expanded .nav-text {
     opacity: 1;
 }
     </style>
@@ -263,22 +264,22 @@ footer {
     </footer>
 
 <script>
-const navLinks = document.querySelectorAll('.nav-item a');
 const sideNav = document.querySelector('.side-nav');
+const navLinks = document.querySelectorAll('.nav-item a');
 
+// 1. DESKTOP: Expand on mouse enter, collapse on mouse leave
+sideNav.addEventListener('mouseenter', () => {
+    sideNav.classList.add('expanded');
+});
+
+sideNav.addEventListener('mouseleave', () => {
+    sideNav.classList.remove('expanded');
+});
+
+// 2. MOBILE: When a link is clicked, force it to collapse immediately
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        // 1. Force the width back to collapsed
-        sideNav.style.width = '60px';
-        
-        // 2. Tell the browser to ignore the 'hover' state temporarily
-        sideNav.style.pointerEvents = 'none';
-
-        // 3. Reset it after the page scrolls (500ms)
-        setTimeout(() => {
-            sideNav.style.width = '';
-            sideNav.style.pointerEvents = 'auto';
-        }, 500);
+        sideNav.classList.remove('expanded');
     });
 });
 </script>
