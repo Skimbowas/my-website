@@ -185,6 +185,14 @@ footer {
         padding: 20px;
     }
 }
+/* ADD THIS BACK to your CSS */
+.side-nav:hover {
+    width: 200px;
+}
+
+.side-nav:hover .nav-text {
+    opacity: 1;
+}
     </style>
 </head>
 <body>
@@ -255,22 +263,24 @@ footer {
     </footer>
 
 <script>
-    // This selects all the links in your sidebar
-    const navLinks = document.querySelectorAll('.nav-item a');
-    const sideNav = document.querySelector('.side-nav');
+const navLinks = document.querySelectorAll('.nav-item a');
+const sideNav = document.querySelector('.side-nav');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // When a link is clicked, we temporarily disable the hover 
-            // by adding a 'closed' class or just forcing a blur
-            sideNav.style.width = '60px';
-            
-            // This resets the style after a split second so hover works again later
-            setTimeout(() => {
-                sideNav.style.width = '';
-            }, 300);
-        });
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // 1. Force the width back to collapsed
+        sideNav.style.width = '60px';
+        
+        // 2. Tell the browser to ignore the 'hover' state temporarily
+        sideNav.style.pointerEvents = 'none';
+
+        // 3. Reset it after the page scrolls (500ms)
+        setTimeout(() => {
+            sideNav.style.width = '';
+            sideNav.style.pointerEvents = 'auto';
+        }, 500);
     });
+});
 </script>
 </body>
 </html>
