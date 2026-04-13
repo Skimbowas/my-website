@@ -31,16 +31,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navElement) {
         navElement.innerHTML = sidebarHTML;
 
-        // Highlight active page
-        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        // Better Active Page Detection
+        const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-item a');
+        
         navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPath) {
+            const linkPath = link.getAttribute('href');
+            // Highlights if the URL includes the filename or if we're at home
+            if (currentPath.includes(linkPath) || (currentPath.endsWith('/') && linkPath === 'index.html')) {
                 link.parentElement.classList.add('active-page');
             }
         });
 
-        // Hover effect for Desktop
+        // Hover expansion for Desktop
         if (window.innerWidth > 768) {
             navElement.addEventListener('mouseenter', () => navElement.classList.add('expanded'));
             navElement.addEventListener('mouseleave', () => navElement.classList.remove('expanded'));
@@ -56,13 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const filterValue = btn.getAttribute('data-filter');
 
                 bookCards.forEach(card => {
                     const statusTag = card.querySelector('.status-tag');
                     if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
-                        card.style.display = "block"; // Use block instead of class for reliability
+                        card.style.display = "block";
                     } else {
                         card.style.display = "none";
                     }
@@ -87,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 lightbox.classList.add('active');
             });
         });
-
         lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
     }
 });
