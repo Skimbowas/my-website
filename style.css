@@ -184,3 +184,8 @@ footer {
     main, footer { margin-left: 0; padding: 20px; }
     .side-nav { display: none; } /* Simplified for now */
 }
+
+/* This must be at the bottom of style.css */
+.hidden {
+    display: none !important;
+}
