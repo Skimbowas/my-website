@@ -37,23 +37,28 @@ document.addEventListener("DOMContentLoaded", () => {
         
         navLinks.forEach(link => {
             const linkPath = link.getAttribute('href');
-            // Highlights if the URL includes the filename or if we're at home
             if (currentPath.includes(linkPath) || (currentPath.endsWith('/') && linkPath === 'index.html')) {
                 link.parentElement.classList.add('active-page');
             }
         });
 
-        // Hover expansion for Desktop
         if (window.innerWidth > 768) {
             navElement.addEventListener('mouseenter', () => navElement.classList.add('expanded'));
             navElement.addEventListener('mouseleave', () => navElement.classList.remove('expanded'));
         }
     }
 
-    // --- 2. LIBRARY FILTER LOGIC ---
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    // --- 2. APPLY FLOATING EFFECT & FILTERS ---
     const bookCards = document.querySelectorAll('.book-card');
+    const photoItems = document.querySelectorAll('.photo-item');
+    const projectCards = document.querySelectorAll('.project-card');
 
+    // Add entrance animation class to all items automatically
+    [...bookCards, ...photoItems, ...projectCards].forEach(item => {
+        item.classList.add('entrance-anim');
+    });
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -65,6 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const statusTag = card.querySelector('.status-tag');
                     if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
                         card.style.display = "block";
+                        // Re-trigger animation when filtered back in
+                        card.style.animation = 'none';
+                        card.offsetHeight; // trigger reflow
+                        card.style.animation = '';
                     } else {
                         card.style.display = "none";
                     }

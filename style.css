@@ -107,7 +107,7 @@ h1 {
 }
 
 .book-card:hover, .project-card:hover, .card:hover {
-    transform: translateY(-4px); /* Dialed back from -8px */
+    transform: translateY(-4px); 
     background: rgba(255, 255, 255, 0.07);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
@@ -128,22 +128,24 @@ h1 {
     transition: transform 0.3s ease;
 }
 
-.photo-item img:hover { transform: scale(1.015); } /* Dialed back */
+.photo-item img:hover { transform: scale(1.015); } 
 
-/* 6. Animations (Staggered) */
+/* 6. Animations (The Floating Entrance) */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.book-card, .photo-item, .project-card {
-    opacity: 0; 
-    animation: fadeInUp 0.5s ease forwards;
+/* This is the class that makes them float on entrance */
+.entrance-anim {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
 }
 
-.book-card:nth-child(1), .photo-item:nth-child(1) { animation-delay: 0.1s; }
-.book-card:nth-child(2), .photo-item:nth-child(2) { animation-delay: 0.2s; }
-.book-card:nth-child(3), .photo-item:nth-child(3) { animation-delay: 0.3s; }
+.entrance-anim:nth-child(1) { animation-delay: 0.1s; }
+.entrance-anim:nth-child(2) { animation-delay: 0.2s; }
+.entrance-anim:nth-child(3) { animation-delay: 0.3s; }
+.entrance-anim:nth-child(4) { animation-delay: 0.4s; }
 
 /* 7. Lightbox */
 .lightbox {
