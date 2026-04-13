@@ -26,19 +26,28 @@ const sidebarHTML = `
 `;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. INJECT SIDEBAR
+    // --- 1. SIDEBAR & ACTIVE STATE ---
     const navElement = document.querySelector('.side-nav');
     if (navElement) {
         navElement.innerHTML = sidebarHTML;
 
-        // NEW LOGIC: Only allow the "Slide Out" expansion on Desktop (wider than 768px)
+        // Highlight active page
+        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll('.nav-item a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.parentElement.classList.add('active-page');
+            }
+        });
+
+        // Hover effect for Desktop
         if (window.innerWidth > 768) {
             navElement.addEventListener('mouseenter', () => navElement.classList.add('expanded'));
             navElement.addEventListener('mouseleave', () => navElement.classList.remove('expanded'));
         }
     }
 
-    // 2. FILTER LOGIC
+    // --- 2. LIBRARY FILTER LOGIC ---
     const filterBtns = document.querySelectorAll('.filter-btn');
     const bookCards = document.querySelectorAll('.book-card');
 
@@ -53,48 +62,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 bookCards.forEach(card => {
                     const statusTag = card.querySelector('.status-tag');
                     if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
-                        card.classList.remove('hidden');
+                        card.style.display = "block"; // Use block instead of class for reliability
                     } else {
-                        card.classList.add('hidden');
+                        card.style.display = "none";
                     }
                 });
             });
         });
     }
 
-    // 3. LIGHTBOX LOGIC
-    // Create the lightbox elements dynamically
-    const lightbox = document.createElement('div');
-    lightbox.classList.add('lightbox');
-    document.body.appendChild(lightbox);
-
-    const lightboxImg = document.createElement('img');
-    lightbox.appendChild(lightboxImg);
-
-    // Get all images in the photo-gallery
+    // --- 3. LIGHTBOX LOGIC ---
     const galleryImages = document.querySelectorAll('.photo-item img');
+    if (galleryImages.length > 0) {
+        const lightbox = document.createElement('div');
+        lightbox.classList.add('lightbox');
+        document.body.appendChild(lightbox);
+        const lightboxImg = document.createElement('img');
+        lightbox.appendChild(lightboxImg);
 
-    galleryImages.forEach(img => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightbox.classList.add('active');
+        galleryImages.forEach(img => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
         });
-    });
 
-    // Close lightbox when clicking anywhere on the dark background
-    lightbox.addEventListener('click', () => {
-        lightbox.classList.remove('active');
-    });
-
-    // 4. ACTIVE PAGE HIGHLIGHTER
-const currentPath = window.location.pathname.split("/").pop() || "index.html";
-const navLinks = document.querySelectorAll('.nav-item a');
-
-navLinks.forEach(link => {
-    // If the link's href matches the current page filename
-    if (link.getAttribute('href') === currentPath) {
-        link.parentElement.classList.add('active-page');
+        lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
     }
-});
 });
