@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navElement) {
         navElement.innerHTML = sidebarHTML;
 
-        // Bulletproof Detection: Checks filenames and clean URLs
         const currentPath = window.location.pathname.toLowerCase();
         const navLinks = document.querySelectorAll('.nav-item a');
         
@@ -39,10 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const linkPath = link.getAttribute('href').toLowerCase();
             const pageName = linkPath.replace('.html', ''); 
 
-            if (currentPath.endsWith(linkPath) || 
-                currentPath.endsWith(pageName) || 
-                currentPath.endsWith(pageName + '/') ||
-                (currentPath === "/" && linkPath === "index.html")) {
+            // HIGHLIGHT LOGIC
+            const isExactMatch = currentPath.endsWith(linkPath) || currentPath.endsWith(pageName);
+            const isHomeRoot = (currentPath === "/" || currentPath.endsWith('/index')) && linkPath === "index.html";
+            const isPartialMatch = currentPath.includes(pageName) && pageName !== "index";
+
+            if (isExactMatch || isHomeRoot || isPartialMatch) {
                 link.parentElement.classList.add('active-page');
             }
         });
@@ -54,16 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- 2. ENTRANCE ANIMATIONS & FILTERS ---
-    const bookCards = document.querySelectorAll('.book-card');
-    const photoItems = document.querySelectorAll('.photo-item');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    // Automatically tag items for the floating effect
-    [...bookCards, ...photoItems, ...projectCards].forEach(item => {
-        item.classList.add('entrance-anim');
-    });
+    const itemsToAnimate = document.querySelectorAll('.book-card, .photo-item, .project-card');
+    itemsToAnimate.forEach(item => item.classList.add('entrance-anim'));
 
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const bookCards = document.querySelectorAll('.book-card');
+
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -75,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const statusTag = card.querySelector('.status-tag');
                     if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
                         card.style.display = "block";
-                        // Re-trigger the float animation
                         card.style.animation = 'none';
                         card.offsetHeight; 
                         card.style.animation = '';
