@@ -30,18 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const navElement = document.querySelector('.side-nav');
     if (navElement) {
         navElement.innerHTML = sidebarHTML;
-        navElement.addEventListener('mouseenter', () => navElement.classList.add('expanded'));
-        navElement.addEventListener('mouseleave', () => navElement.classList.remove('expanded'));
+
+        // NEW LOGIC: Only allow the "Slide Out" expansion on Desktop (wider than 768px)
+        if (window.innerWidth > 768) {
+            navElement.addEventListener('mouseenter', () => navElement.classList.add('expanded'));
+            navElement.addEventListener('mouseleave', () => navElement.classList.remove('expanded'));
+        }
     }
 
-    // 2. FILTER LOGIC (This is what makes the buttons work!)
+    // 2. FILTER LOGIC
     const filterBtns = document.querySelectorAll('.filter-btn');
     const bookCards = document.querySelectorAll('.book-card');
 
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Change button colors
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
@@ -49,12 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 bookCards.forEach(card => {
                     const statusTag = card.querySelector('.status-tag');
-                    
-                    // Logic: If "all" is clicked, show everything. 
-                    // Otherwise, only show if the tag matches the button.
-                    if (filterValue === 'all') {
-                        card.classList.remove('hidden');
-                    } else if (statusTag.classList.contains(filterValue)) {
+                    if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
                         card.classList.remove('hidden');
                     } else {
                         card.classList.add('hidden');

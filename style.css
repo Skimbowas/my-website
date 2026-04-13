@@ -178,14 +178,39 @@ footer {
     color: var(--text-dim);
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .photo-gallery { column-count: 1; }
-    main, footer { margin-left: 0; padding: 20px; }
-    .side-nav { display: none; } /* Simplified for now */
-}
+    /* Turn the sidebar into a bottom bar */
+    .side-nav {
+        width: 100% !important;
+        height: 60px !important;
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        flex-direction: row !important;
+        justify-content: space-around;
+        padding-top: 0;
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        backdrop-filter: blur(20px);
+    }
 
-/* This must be at the bottom of style.css */
-.hidden {
-    display: none !important;
+    /* Hide the text so only icons show (cleaner for mobile) */
+    .nav-text {
+        display: none;
+    }
+
+    .nav-item a {
+        padding: 10px;
+    }
+
+    /* Remove the margin from the main content so it fills the screen */
+    main, footer {
+        margin-left: 0 !important;
+        padding-bottom: 80px; /* Space so content isn't hidden by the bar */
+    }
+
+    /* Keep sidebar from expanding on mobile touch */
+    .side-nav.expanded {
+        width: 100% !important;
+    }
 }
