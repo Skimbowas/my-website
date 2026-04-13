@@ -31,20 +31,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navElement) {
         navElement.innerHTML = sidebarHTML;
 
-        const currentPath = window.location.pathname.toLowerCase();
+        // Extract the specific file name from the URL
+        const pathArray = window.location.pathname.split("/");
+        let currentPage = pathArray[pathArray.length - 1].toLowerCase();
+        
+        // Handle root URLs (like kapalaga.com/)
+        if (currentPage === "" || currentPage === "index") {
+            currentPage = "index.html";
+        }
+
         const navLinks = document.querySelectorAll('.nav-item a');
         
         navLinks.forEach(link => {
-            const linkPath = link.getAttribute('href').toLowerCase();
-            const pageName = linkPath.replace('.html', ''); 
+            const linkHref = link.getAttribute('href').toLowerCase();
+            
+            // Check for exact matches or clean URL matches
+            const isExact = (currentPage === linkHref);
+            const isCleanMatch = (linkHref.replace('.html', '') === currentPage);
 
-            // HIGHLIGHT LOGIC
-            const isExactMatch = currentPath.endsWith(linkPath) || currentPath.endsWith(pageName);
-            const isHomeRoot = (currentPath === "/" || currentPath.endsWith('/index')) && linkPath === "index.html";
-            const isPartialMatch = currentPath.includes(pageName) && pageName !== "index";
-
-            if (isExactMatch || isHomeRoot || isPartialMatch) {
+            if (isExact || isCleanMatch) {
                 link.parentElement.classList.add('active-page');
+            } else {
+                link.parentElement.classList.remove('active-page');
             }
         });
 
@@ -70,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 bookCards.forEach(card => {
                     const statusTag = card.querySelector('.status-tag');
-                    if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
+                    if (filterValue === 'all' || (statusTag && statusTag.classList.contains(filterValue))) {
                         card.style.display = "block";
                         card.style.animation = 'none';
                         card.offsetHeight; 
