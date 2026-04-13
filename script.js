@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-    
+
     // 3. LIGHTBOX LOGIC
     // Create the lightbox elements dynamically
     const lightbox = document.createElement('div');
@@ -86,4 +86,15 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox.addEventListener('click', () => {
         lightbox.classList.remove('active');
     });
+
+    // 4. ACTIVE PAGE HIGHLIGHTER
+const currentPath = window.location.pathname.split("/").pop() || "index.html";
+const navLinks = document.querySelectorAll('.nav-item a');
+
+navLinks.forEach(link => {
+    // If the link's href matches the current page filename
+    if (link.getAttribute('href') === currentPath) {
+        link.parentElement.classList.add('active-page');
+    }
+});
 });

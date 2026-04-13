@@ -247,3 +247,59 @@ footer {
 .lightbox.active img {
     transform: scale(1);
 }
+
+/* Active Page Styling */
+.nav-item.active-page a {
+    background: rgba(99, 102, 241, 0.2); /* Subtle indigo tint */
+    border-left: 3px solid #6366f1;
+}
+
+.nav-item.active-page .icon {
+    filter: drop-shadow(0 0 8px #6366f1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply this to book cards and photo items */
+.book-card, .photo-item {
+    opacity: 0; /* Start invisible */
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Staggered delay: Each item waits a bit longer than the last */
+.book-card:nth-child(1), .photo-item:nth-child(1) { animation-delay: 0.1s; }
+.book-card:nth-child(2), .photo-item:nth-child(2) { animation-delay: 0.2s; }
+.book-card:nth-child(3), .photo-item:nth-child(3) { animation-delay: 0.3s; }
+.book-card:nth-child(4), .photo-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply this to book cards and photo items */
+.book-card, .photo-item {
+    opacity: 0; /* Start invisible */
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Staggered delay: Each item waits a bit longer than the last */
+.book-card:nth-child(1), .photo-item:nth-child(1) { animation-delay: 0.1s; }
+.book-card:nth-child(2), .photo-item:nth-child(2) { animation-delay: 0.2s; }
+.book-card:nth-child(3), .photo-item:nth-child(3) { animation-delay: 0.3s; }
+.book-card:nth-child(4), .photo-item:nth-child(4) { animation-delay: 0.4s; }
