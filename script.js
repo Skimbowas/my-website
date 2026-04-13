@@ -31,13 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navElement) {
         navElement.innerHTML = sidebarHTML;
 
-        // Better Active Page Detection
-        const currentPath = window.location.pathname;
+        // Bulletproof Detection: Checks filenames and clean URLs
+        const currentPath = window.location.pathname.toLowerCase();
         const navLinks = document.querySelectorAll('.nav-item a');
         
         navLinks.forEach(link => {
-            const linkPath = link.getAttribute('href');
-            if (currentPath.includes(linkPath) || (currentPath.endsWith('/') && linkPath === 'index.html')) {
+            const linkPath = link.getAttribute('href').toLowerCase();
+            const pageName = linkPath.replace('.html', ''); 
+
+            if (currentPath.endsWith(linkPath) || 
+                currentPath.endsWith(pageName) || 
+                currentPath.endsWith(pageName + '/') ||
+                (currentPath === "/" && linkPath === "index.html")) {
                 link.parentElement.classList.add('active-page');
             }
         });
@@ -48,12 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 2. APPLY FLOATING EFFECT & FILTERS ---
+    // --- 2. ENTRANCE ANIMATIONS & FILTERS ---
     const bookCards = document.querySelectorAll('.book-card');
     const photoItems = document.querySelectorAll('.photo-item');
     const projectCards = document.querySelectorAll('.project-card');
 
-    // Add entrance animation class to all items automatically
+    // Automatically tag items for the floating effect
     [...bookCards, ...photoItems, ...projectCards].forEach(item => {
         item.classList.add('entrance-anim');
     });
@@ -70,9 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     const statusTag = card.querySelector('.status-tag');
                     if (filterValue === 'all' || statusTag.classList.contains(filterValue)) {
                         card.style.display = "block";
-                        // Re-trigger animation when filtered back in
+                        // Re-trigger the float animation
                         card.style.animation = 'none';
-                        card.offsetHeight; // trigger reflow
+                        card.offsetHeight; 
                         card.style.animation = '';
                     } else {
                         card.style.display = "none";
@@ -82,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 3. LIGHTBOX LOGIC ---
+    // --- 3. LIGHTBOX ---
     const galleryImages = document.querySelectorAll('.photo-item img');
     if (galleryImages.length > 0) {
         const lightbox = document.createElement('div');
