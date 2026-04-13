@@ -35,4 +35,31 @@ document.addEventListener("DOMContentLoaded", () => {
         navElement.addEventListener('mouseenter', () => navElement.classList.add('expanded'));
         navElement.addEventListener('mouseleave', () => navElement.classList.remove('expanded'));
     }
+
+    // Filter Logic for the Library Page
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const bookCards = document.querySelectorAll('.book-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove 'active' class from all buttons and add to the clicked one
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            bookCards.forEach(card => {
+                // Check the status tag inside the card
+                const statusTag = card.querySelector('.status-tag');
+                
+                if (filterValue === 'all') {
+                    card.classList.remove('hidden');
+                } else if (statusTag.classList.contains(filterValue)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
 });
