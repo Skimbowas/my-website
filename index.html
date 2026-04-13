@@ -8,37 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="side-nav">
-    <div class="nav-item">
-        <a href="#home">
-            <span class="icon">🏠</span>
-            <span class="nav-text">Home</span>
-        </a>
-    </div>
-    <div class="nav-item">
-        <a href="#now">
-            <span class="icon">🕒</span>
-            <span class="nav-text">Now</span>
-        </a>
-    </div>
-    <div class="nav-item">
-        <a href="projects.html">
-            <span class="icon">🚀</span>
-            <span class="nav-text">Projects</span>
-        </a>
-    </div>
-    <div class="nav-item">
-    <a href="photos.html"> <span class="icon">📸</span>
-        <span class="nav-text">Photos</span>
-    </a>
-</div>
-    <div class="nav-item">
-    <a href="library.html">
-        <span class="icon">📚</span>
-        <span class="nav-text">Library</span>
-    </a>
-</div>
-</nav>
+<nav class="side-nav"></nav>
 <main id="home">
     <section class="hero">
         <h1>Hello, I'm Steve!</h1>
@@ -69,25 +39,6 @@
         </div>
     </footer>
 
-<script>
-const sideNav = document.querySelector('.side-nav');
-const navLinks = document.querySelectorAll('.nav-item a');
-
-// 1. DESKTOP: Expand on mouse enter, collapse on mouse leave
-sideNav.addEventListener('mouseenter', () => {
-    sideNav.classList.add('expanded');
-});
-
-sideNav.addEventListener('mouseleave', () => {
-    sideNav.classList.remove('expanded');
-});
-
-// 2. MOBILE: When a link is clicked, force it to collapse immediately
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        sideNav.classList.remove('expanded');
-    });
-});
-</script>
+<script src="script.js"></script>
 </body>
 </html>
