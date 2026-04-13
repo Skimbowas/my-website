@@ -61,4 +61,29 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    
+    // 3. LIGHTBOX LOGIC
+    // Create the lightbox elements dynamically
+    const lightbox = document.createElement('div');
+    lightbox.classList.add('lightbox');
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = document.createElement('img');
+    lightbox.appendChild(lightboxImg);
+
+    // Get all images in the photo-gallery
+    const galleryImages = document.querySelectorAll('.photo-item img');
+
+    galleryImages.forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+        });
+    });
+
+    // Close lightbox when clicking anywhere on the dark background
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
 });
