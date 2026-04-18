@@ -111,34 +111,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function updateReadingList() {
-    // Replace this with your specific "Read" shelf RSS link
-    const rssUrl = 'https://www.goodreads.com/review/list_rss/YOUR_ID?shelf=readhttps://www.goodreads.com/review/list_rss/200425656?key=XFU7yPtgLVBXglkDxyim9LtoZzZiG-ksfKQ-l2dh5deXIrhR&shelf=read'; 
+    const rssUrl = 'https://www.goodreads.com/review/list_rss/200425656?key=XFU7yPtgLVBXglkDxyim9LtoZzZiG-ksfKQ-l2dh5deXIrhR&shelf=read'; 
     const proxyUrl = 'https://api.allorigins.win/get?url=';
 
     try {
         const response = await fetch(`${proxyUrl}${encodeURIComponent(rssUrl)}`);
         const data = await response.json();
+        
         const parser = new DOMParser();
+        // Parse specifically as XML
         const xmlDoc = parser.parseFromString(data.contents, "text/xml");
         
-        // This selects the first (most recent) book in your "Read" list
-        const book = xmlDoc.querySelector("item");
+        // Target the first item in the feed
+        const firstItem = xmlDoc.querySelector("item");
         const readingElement = document.querySelector("#now ul li:nth-child(3)");
 
-        if (book) {
-            const title = book.querySelector("title").textContent;
-            // Update the label to reflect that these are completed books
-            readingElement.innerHTML = `📚 Recently read: ${title}`;
+        if (firstItem) {
+            // Goodreads title usually looks like "Book Title by Author Name"
+            let fullTitle = firstItem.querySelector("title").textContent;
+            
+            // OPTIONAL: Clean up the title to remove the "by Author" part 
+            // if you just want the book name.
+            const cleanTitle = fullTitle.split(' by ')[0];
+
+            readingElement.innerHTML = `📚 Recently read: ${cleanTitle}`;
         } else {
-            // Fallback if you haven't marked any books as "Read" yet
-            readingElement.innerHTML = `📚 Recently read: Building my library...`;
+            readingElement.innerHTML = `📚 Recently read: Library is growing!`;
         }
     } catch (error) {
-        console.error("Error fetching Goodreads feed:", error);
-        // Keep the manual text if the API/Proxy fails
-        readingElement.innerHTML = `📚 Recently read: [Saga by Brian K Vaughan]`;
+        console.error("Goodreads Fetch Error:", error);
+        // Fallback to your manual entry if the feed fails
+        readingElement.innerHTML = `📚 Recently read: Saga by Brian K Vaughan`;
     }
 }
 
-document.addEventListener("DOMContentLoaded", updateReadingList);
 });
