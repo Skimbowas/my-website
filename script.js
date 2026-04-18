@@ -109,4 +109,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
     }
+
+    async function updateReadingList() {
+    // Replace this with your specific "Read" shelf RSS link
+    const rssUrl = 'https://www.goodreads.com/review/list_rss/YOUR_ID?shelf=readhttps://www.goodreads.com/review/list_rss/200425656?key=XFU7yPtgLVBXglkDxyim9LtoZzZiG-ksfKQ-l2dh5deXIrhR&shelf=read'; 
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+
+    try {
+        const response = await fetch(`${proxyUrl}${encodeURIComponent(rssUrl)}`);
+        const data = await response.json();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+        
+        // This selects the first (most recent) book in your "Read" list
+        const book = xmlDoc.querySelector("item");
+        const readingElement = document.querySelector("#now ul li:nth-child(3)");
+
+        if (book) {
+            const title = book.querySelector("title").textContent;
+            // Update the label to reflect that these are completed books
+            readingElement.innerHTML = `📚 Recently read: ${title}`;
+        } else {
+            // Fallback if you haven't marked any books as "Read" yet
+            readingElement.innerHTML = `📚 Recently read: Building my library...`;
+        }
+    } catch (error) {
+        console.error("Error fetching Goodreads feed:", error);
+        // Keep the manual text if the API/Proxy fails
+        readingElement.innerHTML = `📚 Recently read: [Saga by Brian K Vaughan]`;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", updateReadingList);
 });
