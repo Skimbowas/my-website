@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 4. GOODREADS AUTOMATION ---
     async function updateReadingList() {
         // Checking if we are on the page with the "Now" list first
-        const readingElement = document.querySelector("#now ul li:nth-child(3)");
+        const readingElement = document.getElementById("reading-link");
         if (!readingElement) return; 
 
         const rssUrl = 'https://www.goodreads.com/review/list_rss/200425656?key=XFU7yPtgLVBXglkDxyim9LtoZzZiG-ksfKQ-l2dh5deXIrhR&shelf=read'; 
